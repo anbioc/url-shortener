@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios, { AxiosError } from "axios";
 import { getRefreshToken, getToken, setToken } from "./cookie.lib";
 
 const netClient = Axios.create({
@@ -52,5 +52,46 @@ netClient.interceptors.response.use(
       }
     }
     return Promise.reject(error); // For all other errors, return the error as is.
+  }
+);
+
+
+
+
+// ─── Response Interceptor ───
+netClient.interceptors.response.use(
+  // Success: just return the response
+  (response) => response,
+
+  // Error handling
+  (error: AxiosError) => {
+    // ── Detailed error logging ──
+    console.groupCollapsed('🚨 Axios Error Details');
+    
+    console.error('Message:', error.message);
+    
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error('Status:', error.response.status);
+      console.error('Status Text:', error.response.statusText);
+      console.error('Response Data:', error.response.data);
+      console.error('Headers:', error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error('No Response Received');
+      console.error('Request:', error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error('Request Setup Error:', error.message);
+    }
+
+    console.error('Full Error Object:', error);
+    console.error('Config:', error.config);
+    
+    console.groupEnd();
+
+    // Important: still reject the promise so .catch() works
+    return Promise.reject(error);
   }
 );

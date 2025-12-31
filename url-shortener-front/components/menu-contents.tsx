@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { LinkIcon } from 'lucide-react'
+import { ChartNoAxesCombined, LinkIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
@@ -42,7 +42,7 @@ export default function MenuContents ({pathname, classname}: {pathname: string, 
             pathname == "/analytics" ? "bg-sky-100" : ""
           )}
         >
-          <LinkIcon
+          <ChartNoAxesCombined
             className={cn(pathname == "/analytics" ? "text-sky-700" : "")}
           />
           <h1

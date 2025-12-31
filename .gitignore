@@ -1,0 +1,94 @@
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+#
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Code coverage profiles and other test artifacts
+*.out
+coverage.*
+*.coverprofile
+profile.cov
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# env file
+.env
+
+# Editor/IDE
+.idea/
+.vscode/
+
+url-shortener-backend-go/tmp
+url-shortener-backend-go/.env
+
+url-shortener-backend/.env
+
+url-shortener-backend/packages/*/package-lock.json
+url-shortener-backend/sample/**/package-lock.json
+
+# dependencies
+url-shortener-backend/node_modules/
+
+# IDE
+/.idea
+/.awcache
+/.vscode
+/.devcontainer
+/.classpath
+/.project
+/.settings
+*.code-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# bundle
+packages/**/*.d.ts
+packages/**/*.js
+url-shortener-backend/packages/**/*.d.ts
+url-shortener-backend/packages/**/*.js
+# misc
+.DS_Store
+lerna-debug.log
+npm-debug.log
+yarn-error.log
+/**/npm-debug.log
+/packages/**/.npmignore
+/packages/**/LICENSE
+*.tsbuildinfo
+/.nx/workspace-data
+
+# example
+/quick-start
+/example_dist
+/example
+
+# tests
+url-shortener-backend/test
+url-shortener-backend/benchmarks/memory
+url-shortener-backend/coverage
+url-shortener-backend/.nyc_output
+url-shortener-backend/packages/graphql
+url-shortener-backendbenchmarks/memory
+url-shortener-backendbuild/config\.gypi
+
+.npmrc
+pnpm-lock.yaml
+/.history

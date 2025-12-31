@@ -40,6 +40,7 @@ export default function Page() {
       if (response.error) {
         setNotFound(true);
       }
+      console.log(`u response: ${JSON.stringify(response)}`)
       setUrl(response);
       setLoader(false);
     };

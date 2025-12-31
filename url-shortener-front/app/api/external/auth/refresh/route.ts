@@ -1,4 +1,4 @@
-import {  setToken } from "@/lib/cookie.lib";
+import {  setRefreshToken, setToken } from "@/lib/cookie.lib";
 
 import { NextRequest, NextResponse } from "next/server";
 
@@ -34,6 +34,7 @@ export async function GET(request: NextRequest, { params }: { params: { path: st
 
   const data = await response.json();
   await setToken(data.data.accessToken);
+  await setRefreshToken(data.data.refreshToken);
 
   return  NextResponse.json(data, { status: response.status });
 }

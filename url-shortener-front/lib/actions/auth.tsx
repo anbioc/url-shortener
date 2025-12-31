@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { PassThrough } from "stream";
 import { setRefreshToken, setToken } from "../cookie.lib";
 import { da } from "zod/v4/locales";
+import { log } from "console";
+import { json } from "zod";
 
 // Optional: Define a state type for errors/success
 type SignupState = {
@@ -48,6 +50,8 @@ export async function signinAction(
 
     if (!response.ok) {
       const errorData = await response.json();
+        console.log(`Can't sign in: ${JSON.stringify(errorData)}`);
+
       return { error: errorData.message || "Sign-in failed", success: false };
     }
 

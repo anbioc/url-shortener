@@ -161,11 +161,16 @@ export class AuthService {
     );
 
     console.log(`result of refresh: ${JSON.stringify(result)}`);
+     const token = await generateTokens(
+      user,
+      this.jwtService,
+      this.configService,
+    );
     if (result.success) {
       return {
         success: true,
         data: {
-          accessToken: generateAccessToken(user,this.jwtService, this.configService )
+          ...token
         },
         error: null
       };

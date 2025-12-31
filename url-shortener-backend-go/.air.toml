@@ -1,0 +1,16 @@
+# .air.toml
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  cmd = "go build -o ./tmp/main ./cmd"
+  bin = "./tmp/main"
+  include_ext = ["go", "tpl", "tmpl", "html", "css", "js"]
+  exclude_dir = ["tmp", "vendor", "node_modules"]
+  delay = 1000             # ms
+
+[log]
+  main_only = false
+
+[proxy]
+  enabled = false

@@ -1,0 +1,29 @@
+# Binaries for programs
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+[a-zA-Z0-9]*~ # Ignore editor backups
+
+# Test binary, can be ignored with "go test -c"
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories (especially when using Go modules, these are not typically committed)
+vendor/
+
+# Environment-specific or temporary files
+.project
+.tabnine
+.vscode/ # VS Code configuration, consider committing if shared project setup is needed
+.idea/   # IntelliJ/GoLand IDE configuration
+
+# Local development files
+/go.work.sum
+/go.work
+tmp/
+tmp
+.env
