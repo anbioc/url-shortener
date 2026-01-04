@@ -56,15 +56,15 @@ func (s *UserRole) Scan(value interface{}) error {
 }
 
 type User struct {
-	ID           uint      `gorm:"primarykey"`
-	CreatedAt    time.Time `gorm:"column:createdAt;autoCreateTime"`
-	UpdatedAt    time.Time `gorm:"column:updatedAt;autoCreateTime"`
+	ID           uint      `gorm:"primarykey" json:"id"`
+	CreatedAt    time.Time `gorm:"column:createdAt;autoCreateTime" json:"createdAt"`
+	UpdatedAt    time.Time `gorm:"column:updatedAt;autoCreateTime" json:"updatedAt"`
 	Email        string    `gorm:"size:255;uniqueIndex;not null" json:"email"`
 	Fullname     string    `gorm:"size:255;" json:"fullname"`
 	Password     string    `gorm:"size:255;not null" json:"-"`
-	Role         UserRole  `gorm:"type:varchar(20);not null;default:'user';index"`
+	Role         UserRole  `gorm:"type:varchar(20);not null;default:'user';index" json:"role"`
 	RefreshToken string    `gorm:"column:refreshToken;size:255;" json:"-"`
-	Urls         []Url
+	Urls         []Url     `gorm:"foreignKey:userId"  json:"urls"`
 
 	// ... fields
 }

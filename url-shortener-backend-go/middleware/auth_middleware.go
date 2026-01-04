@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/config"
@@ -24,13 +25,22 @@ func AuthMiddleware(env *config.Env) gin.HandlerFunc {
 
 		if len(token) > 7 && token[:7] == "Bearer " {
 			token = token[7:]
+		} else {
+			ctx.JSON(http.StatusUnauthorized, gin.H{
+				"data":    nil,
+				"error":   "Curropt authorization token",
+				"message": "Curropt authorization token, please login and provide auth token inside header",
+			})
+			ctx.Abort()
+			return
 		}
 		id, err := utils.VerifyAccessToken(env, token)
 
 		if err != nil {
+			log.Println("invalid auth: " + err.Error())
 			ctx.JSON(http.StatusUnauthorized, gin.H{
 				"data":    nil,
-				"error":   "Invalid auth token",
+				"error":   err.Error(),
 				"message": "Invalid auth token, please login and provide auth token inside header",
 			})
 			ctx.Abort()

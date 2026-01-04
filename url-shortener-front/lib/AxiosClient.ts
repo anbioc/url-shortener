@@ -38,15 +38,15 @@ netClient.interceptors.response.use(
             refreshtoken: refreshToken,
             }),
          });
-        const accessToken = (await response.json()).data.accessToken;
+        const data = (await response.json());
         // Store the new access and refresh tokens.
-        setToken(accessToken)
+        setToken(data.data.accessToken)
         // Update the authorization header with the new access token.
-        netClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        netClient.defaults.headers.common['Authorization'] = `Bearer ${data.data.accessToken}`;
         return netClient(originalRequest); // Retry the original request with the new access token.
-      } catch (refreshError) {
+      } catch (refreshError: any) {
         // Handle refresh token errors by clearing stored tokens and redirecting to the login page.
-       
+       console.log(`refresh token failed: ${refreshError.message}`)
         window.location.href = '/sign-in';
         return Promise.reject(refreshError);
       }

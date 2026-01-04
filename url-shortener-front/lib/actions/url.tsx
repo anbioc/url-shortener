@@ -17,15 +17,23 @@ export type UrlListResponse = {
 
 export async function increaseUrlCount(short: string) {
   try {
+      const token = await getToken();
+
     const response = await fetch(
-      `${process.env.API_ENDPOINT}/api/url/increase/${short}`
+      `${process.env.API_ENDPOINT}/api/url/increase/${short}`, {
+      method: "GET",
+      cache:'no-store',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    }
     );
   } catch (e: any) {}
 }
 
 export async function getUrlList(): Promise<UrlListResponse> {
   const token = await getToken();
-  console.log(`token: ${token}`)
   try {
     const response = await fetch(`${process.env.API_ENDPOINT}/api/url/list`, {
       method: "GET",
@@ -60,13 +68,16 @@ export async function getUrlList(): Promise<UrlListResponse> {
 
 export async function getUrlFromServer(short: string): Promise<UrlResponse> {
   try {
+      const token = await getToken();
+
     const response = await fetch(
       `${process.env.API_ENDPOINT}/api/url/list/${short}`,
       {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+       headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
       }
     );
 

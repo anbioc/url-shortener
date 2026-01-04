@@ -31,6 +31,10 @@ export default function Page() {
       if (urlResponse.ok) {
         const data = await urlResponse.json();
         setUrls(data.data);
+        console.log(`\n url: ${JSON.stringify(data.data)}`)
+        // urls.map((u) => {
+        //   console.log(`\n url: ${JSON.stringify(u)}`)
+        // })
         console.log("urls got");
       } else {
         const error = await urlResponse.json();
@@ -69,7 +73,6 @@ export default function Page() {
       <hr className="mt-8" />
 
       <div>{urlResponseError && <div>{urlResponseError}</div>}</div>
-
       <div>{urls.length > 0 && <UrlList urls={urls} />}</div>
     </div>
   );
