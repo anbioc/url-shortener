@@ -181,7 +181,7 @@ export function AuthForm({ type }: { type: AuthType }) {
            type="submit" 
            className="w-44 text-lg">
             
-            {type == "signin" ? "SignIn" : "SignUp"}
+            {type == "signin" ? "Sign-in" : "Sign-up"}
             {
               loading && <Spinner className="size-3 text-sky-400"/>
             }
