@@ -5,6 +5,7 @@ import (
 
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/config"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/controllers"
+	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/logger"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/middleware"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/service"
 	"github.com/gin-contrib/cors"
@@ -12,7 +13,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func SetupRouter(db *gorm.DB, env *config.Env) *gin.Engine {
+func SetupRouter(db *gorm.DB, env *config.Env, logger *applogger.Logger) *gin.Engine {
 	r := gin.Default()
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:5173", "http://localhost:3000"},
@@ -26,8 +27,9 @@ func SetupRouter(db *gorm.DB, env *config.Env) *gin.Engine {
 	auth := r.Group("/api/auth")
 	{
 		AuthController := controllers.AuthController{
-			Env: env,
-			DB:  db,
+			Env:    env,
+			DB:     db,
+			Logger: logger,
 		}
 
 		auth.POST("/login", AuthController.Login)
@@ -41,7 +43,8 @@ func SetupRouter(db *gorm.DB, env *config.Env) *gin.Engine {
 	{
 
 		URLController := controllers.UrlController{
-			Service: service.NewService(env, db),
+			Service: service.NewService(env, db, logger),
+			Logger:  logger,
 		}
 
 		url.POST("/create", URLController.CreateUrl)

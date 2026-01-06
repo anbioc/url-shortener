@@ -4,14 +4,16 @@ import (
 	"os"
 
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/config"
+	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/logger"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/model"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/utils"
 	"gorm.io/gorm"
 )
 
 type UrlService struct {
-	env *config.Env
-	db  *gorm.DB
+	env    *config.Env
+	db     *gorm.DB
+	logger *applogger.Logger
 }
 
 type AnalyticsDTO struct {
@@ -19,10 +21,11 @@ type AnalyticsDTO struct {
 	From string `json:"from"`
 }
 
-func NewService(env *config.Env, db *gorm.DB) *UrlService {
+func NewService(env *config.Env, db *gorm.DB, logger *applogger.Logger) *UrlService {
 	return &UrlService{
-		env: env,
-		db:  db,
+		env:    env,
+		db:     db,
+		logger: logger,
 	}
 }
 

@@ -8,10 +8,12 @@ import (
 
 type Env struct {
 	AppEnv           string `mapstructure:"APP_ENV"`
+	LogLevel         string `mapstructure:"LOG_LEVEL"`
 	Port             string `mapstructure:"PORT"`
 	JwtSecret        string `mapstructure:"JWT_SECRET"`
 	JwtRefreshSecret string `mapstructure:"JWT_REFRESH_SECRET"`
 	DbUrl            string `mapstructure:"DATABASE_URL"`
+	Version          string `mapstructure:"VERSION"`
 }
 
 func NewEnv() *Env {

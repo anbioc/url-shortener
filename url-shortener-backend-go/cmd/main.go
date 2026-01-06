@@ -10,15 +10,21 @@ import (
 
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/config"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/database"
+	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/logger"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/router"
 )
 
 func main() {
 	env := config.NewEnv()
 	db := database.InitDB(env)
+	logger := applogger.New(env.LogLevel)
 	// init redis later
 
-	routes := router.SetupRouter(db, env)
+	ctx := context.Background()
+	ctx = context.WithValue(ctx, "serviceName", "url shortener service")
+	ctx = context.WithValue(ctx, "version", env.Version)
+
+	routes := router.SetupRouter(db, env, logger)
 
 	port := env.Port
 	if port == "" {
@@ -31,7 +37,7 @@ func main() {
 
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("listen: %s\n", err)
+			logger.Fatal("listen: %s\n", err)
 
 		}
 	}()
@@ -43,9 +49,9 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Fatal("Server Shutdown:", err)
+		logger.Fatal("Server Shutdown:", err)
 
 	}
-	log.Println("Server exiting")
+	logger.Info("Server exiting")
 
 }

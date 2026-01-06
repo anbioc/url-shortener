@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/config"
+	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/logger"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/model"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/utils"
 	"github.com/gin-gonic/gin"
@@ -13,8 +14,9 @@ import (
 )
 
 type AuthController struct {
-	Env *config.Env
-	DB  *gorm.DB
+	Env    *config.Env
+	DB     *gorm.DB
+	Logger *applogger.Logger
 }
 
 func (ac *AuthController) Register(ctx *gin.Context) {
