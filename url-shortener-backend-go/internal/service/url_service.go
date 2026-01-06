@@ -4,8 +4,8 @@ import (
 	"os"
 
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/config"
-	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/logger"
-	"github.com/anbioc/url-shortener/url-shortener-backend-go/model"
+	"github.com/anbioc/url-shortener/url-shortener-backend-go/internal/model"
+	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/pkg/logger"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/utils"
 	"gorm.io/gorm"
 )

@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/config"
-	"github.com/anbioc/url-shortener/url-shortener-backend-go/database"
-	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/logger"
-	"github.com/anbioc/url-shortener/url-shortener-backend-go/router"
+	"github.com/anbioc/url-shortener/url-shortener-backend-go/internal/database"
+	"github.com/anbioc/url-shortener/url-shortener-backend-go/internal/router"
+	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/pkg/logger"
 )
 
 func main() {

@@ -6,8 +6,8 @@ import (
 	"math/rand/v2"
 	"net/http"
 
-	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/logger"
-	"github.com/anbioc/url-shortener/url-shortener-backend-go/service"
+	"github.com/anbioc/url-shortener/url-shortener-backend-go/internal/service"
+	applogger "github.com/anbioc/url-shortener/url-shortener-backend-go/pkg/logger"
 	"github.com/anbioc/url-shortener/url-shortener-backend-go/utils"
 	"github.com/gin-gonic/gin"
 )
